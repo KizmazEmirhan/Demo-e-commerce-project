@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-center pt-12">
     <div id="footer-section" class="w-full">
-      <div id="brandName" class="flex justify-center bg-[#FAFAFA] p-28">
+      <div id="brandName" class="flex justify-center bg-[#FAFAFA] lg:p-28 p-4">
         <div class="container flex justify-between items-center">
           <div class="font-bold text-lg">Demo Brand</div>
           <div id="social-media" class="flex gap-5">
@@ -31,8 +31,8 @@
         </div>
       </div>
       <hr class="w-auto" />
-      <div class="flex justify-center p-2">
-        <div id="other informations" class="container pt-8 flex justify-between">
+      <div class="flex justify-center p-4">
+        <div id="other informations" class="container py-8 flex justify-between">
           <ul id="company-info" class="flex flex-col gap-4">
             <p class="font-bold text-lg">Company Info</p>
             <hr />

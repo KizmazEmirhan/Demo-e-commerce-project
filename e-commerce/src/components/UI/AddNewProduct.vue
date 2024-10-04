@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center">
+  <div class="flex justify-center p-2">
     <div class="container grid grid-cols-2 gap-4">
       <div class="flex flex-grow items-center justify-center text-center">
         <div
@@ -98,7 +98,7 @@
             }}</span>
           </div>
 
-          <div class="flex gap-4">
+          <div class="flex gap-4 flex-col lg:flex-row">
             <div class="flex flex-col w-full gap-1">
               <label for="gender">Gender</label>
               <select

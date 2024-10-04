@@ -2,7 +2,7 @@
   <div
     id="choose-section"
     v-if="!selectedComponent"
-    class="flex justify-center pt-4"
+    class="flex justify-center pt-4 p-2"
   >
     <div class="container flex justify-between">
       <div
@@ -18,7 +18,7 @@
         />
         <div class="absolute flex flex-col items-center justify-center">
           <button
-            class="text-white font-bold text-2xl"
+            class="text-white font-bold lg:text-2xl text-sm"
             @click="selectComponent(thing.text)"
           >
             {{ thing.text }}
