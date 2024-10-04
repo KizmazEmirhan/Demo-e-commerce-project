@@ -1,21 +1,18 @@
-
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBFF_XC3JIf0YJi7UqH73SRcbFYYz2T-gA",
-  authDomain: "e-commerceproject-367c4.firebaseapp.com",
-  projectId: "e-commerceproject-367c4",
-  storageBucket: "e-commerceproject-367c4.appspot.com",
-  messagingSenderId: "325218704878",
-  appId: "1:325218704878:web:1349526b7f53a58f6b42ff",
-  measurementId: "G-58K1SK719B",
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID,
+  measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-
 const app = initializeApp(firebaseConfig);
-
 
 const db = getFirestore(app);
 const storage = getStorage(app);
