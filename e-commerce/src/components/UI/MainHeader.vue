@@ -8,7 +8,7 @@
         <a href="/">Demo Brand</a>
       </div>
       <div class="lg:hidden flex">
-        <button>
+        <button @click="openMobileMenu">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="30"
@@ -23,6 +23,89 @@
             />
           </svg>
         </button>
+      </div>
+      <div
+        id="mobileMenu"
+        class="flex w-0 h-0 z-[999] overflow-x-hidden top-0 left-0 fixed"
+      >
+        <div id="menuWrapper" class="relative flex flex-col bg-[#FAFAFA] p-6">
+          <div class="flex justify-between p-2 gap-5">
+            <p class="font-bold">Demo Brand</p>
+            <button @click="closeMobileMenu">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-x-square"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"
+                />
+                <path
+                  d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <ul id="navigation" class="flex flex-col gap-4 p-2">
+            <li id="login">
+              <button class="flex gap-3 items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  fill="#23A6F0"
+                  class="bi bi-person"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"
+                  />
+                </svg>
+                <div class="text-[#23a6f0]">Log in/Register</div>
+              </button>
+            </li>
+            <li id="likedItems">
+              <button class="flex gap-3 items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  fill="#23A6F0"
+                  class="bi bi-heart"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"
+                  />
+                </svg>
+                <div class="text-[#23a6f0]">Favorites</div>
+              </button>
+            </li>
+            <li id="admin">
+              <router-link :to="{ name: 'AdminPage' }">
+                <div class="flex items-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="#23a6f0"
+                    class="bi bi-person-gear"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"
+                    />
+                  </svg>
+                  <p class="text-[#23a6f0]">Admin</p>
+                </div>
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
       <ul id="rooting-buttons" class="lg:flex gap-6 hidden">
         <li>
@@ -111,8 +194,8 @@
           </button>
         </li>
         <li id="admin" class="text-[#23A6F0]">
-          <router-link :to="{ name: 'AdminPage' }"
-            ><div class="flex items-center gap-3">
+          <router-link :to="{ name: 'AdminPage' }">
+            <div class="flex items-center gap-3">
               <p class="hidden lg:block">Admin</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -125,12 +208,29 @@
                 <path
                   d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m.256 7a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382zM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"
                 />
-              </svg></div
-          ></router-link>
+              </svg>
+            </div>
+          </router-link>
         </li>
       </ul>
     </div>
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  methods: {
+    openMobileMenu() {
+      const element = document.getElementById("mobileMenu");
+      element.style.width = "100%";
+      element.style.height = "100%";
+      element.style.backgroundColor = "rgba(0,0,0,0.4)";
+    },
+    closeMobileMenu() {
+      const element = document.getElementById("mobileMenu");
+      element.style.width = "0%";
+      element.style.height = "0%";
+    },
+  },
+};
+</script>
