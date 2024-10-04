@@ -47,7 +47,7 @@
                   class="border bg-[#a2a2a2] w-10 h-10 rounded-md"
                 />
                 <div>
-                  <p>{{ file.name }}</p>
+                  <p class="break-all">{{ file.name }}</p>
                 </div>
               </div>
               <button @click="remove(index)" title="Remove File">
