@@ -271,6 +271,7 @@ export default {
 
         this.message = "Ürün başarıyla yüklendi!";
         this.isError = false;
+        this.clearInputs();
         this.clearMessage();
       } catch (error) {
         console.error("Hata:", error);
@@ -283,6 +284,14 @@ export default {
         this.message = null;
         this.hasError = false;
       }, 3000);
+    },
+    clearInputs() {
+      this.brand = "";
+      this.description = "";
+      this.gender = "";
+      this.color = "";
+      this.price = "";
+      this.files = [];
     },
   },
 };
