@@ -1,11 +1,11 @@
 <template>
-  <div id="sub-categories" class="flex justify-center bg-[#FAFAFA] p-5">
-    <div class="container flex gap-20">
+  <div id="sub-categories" class="flex justify-center bg-[#FAFAFA] pt-5">
+    <div class="container justify-between gap-20 lg:flex hidden">
       <div
         v-for="category in subCategories"
         :key="category.id"
         id="content"
-        class="container flex justify-center"
+        class="flex justify-center"
       >
         <div class="flex justify-center items-center">
           <img :src="category.image" alt="" class="relative" />
@@ -18,12 +18,28 @@
       </div>
     </div>
   </div>
+  <div class="lg:hidden block py-3" id="mobileCategoryMenu">
+    <Swiper :slidesPerView="3" :pagination="{ clickable: true }">
+      <SwiperSlide
+        v-for="category in subCategories"
+        :key="category.id"
+        class="w-fit text-center "
+        >{{ category.categoryName }}</SwiperSlide
+      >
+    </Swiper>
+  </div>
 </template>
 
 <script>
+import { Swiper, SwiperSlide } from "swiper/vue";
 import { db } from "@/firebase";
+import "swiper/css";
 import { collection, getDocs } from "firebase/firestore";
 export default {
+  components: {
+    Swiper,
+    SwiperSlide,
+  },
   data() {
     return {
       subCategories: [],
@@ -38,12 +54,11 @@ export default {
           collection(db, this.collectionName)
         );
         querySnapshot.forEach((doc) => {
+          const data = doc.data();
           this.subCategories.push({
-            image: doc._document.data.value.mapValue.fields.image.stringValue,
-            categoryName:
-              doc._document.data.value.mapValue.fields.category_name
-                .stringValue,
-            id: doc._document.data.value.mapValue.fields.id.integerValue,
+            image: data.image,
+            categoryName: data.category_name,
+            id: data.id,
           });
         });
       } catch (error) {

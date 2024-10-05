@@ -17,7 +17,7 @@
         <img
           :src="product.image"
           alt="product-image"
-          class="group-hover:opacity-25 transition-opacity"
+          class="group-hover:opacity-45 transition-opacity"
         />
         <div class="hidden group-hover:block absolute">
           <div class="flex flex-col items-center gap-4">
