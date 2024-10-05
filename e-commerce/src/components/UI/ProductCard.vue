@@ -1,7 +1,7 @@
 <template>
   <div
     id="product-card"
-    class="flex flex-col gap-5 border rounded bg-[#FAFAFA] h-fit cursor-pointer group"
+    class="flex flex-col gap-5 border rounded bg-[#FAFAFA] h-fit cursor-pointer group "
     v-for="(product, index) in receivedProducts"
     :key="index"
   >

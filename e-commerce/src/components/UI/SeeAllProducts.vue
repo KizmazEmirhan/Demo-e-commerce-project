@@ -1,6 +1,8 @@
 <template>
-  <div class="flex flex-wrap justify-center gap-5">
-    <ProductCard :receivedProducts="allProducts"></ProductCard>
+  <div class="flex justify-center p-4">
+    <div class="container flex flex-wrap gap-5 justify-center sm:justify-normal">
+      <ProductCard :receivedProducts="allProducts"></ProductCard>
+    </div>
   </div>
 </template>
 
