@@ -115,6 +115,31 @@
                 errors.gender
               }}</span>
             </div>
+            <div id="category-selection" class="flex flex-col gap-1 w-full">
+              <label for="category">Category</label>
+              <select
+                name="Category"
+                id="category"
+                v-model="category"
+                :class="{ 'border-red-500': hasError && !gender }"
+                class="border p-2 outline-[#23a6e0]"
+              >
+                <option value="" disabled selected hidden>
+                  Select Category
+                </option>
+                <option value="Accessory" class="flex items-center">
+                  Aksesuar
+                </option>
+                <option value="Shoes" class="flex items-center">
+                  Ayakkabı
+                </option>
+                <option value="Mens Fashion">Erkek Giyim</option>
+                <option value="Womens Fashion">Kadın Giyim</option>
+              </select>
+              <span v-if="hasError && !category" class="text-red-500">{{
+                errors.category
+              }}</span>
+            </div>
             <div class="flex flex-col gap-1 w-full">
               <label for="price">Price</label>
               <input
@@ -174,6 +199,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export default {
   data() {
     return {
+      category: "",
       brand: "",
       description: "",
       gender: "",
@@ -183,6 +209,7 @@ export default {
       files: [],
       hasError: false,
       errors: {
+        category: "",
         brand: "",
         desc: "",
         price: "",
@@ -225,6 +252,7 @@ export default {
     async submitProduct() {
       this.hasError = false;
       this.errors = {
+        category: "",
         brand: "",
         desc: "",
         price: "",
@@ -233,6 +261,7 @@ export default {
         gender: "",
       };
       if (
+        !this.category ||
         !this.brand ||
         !this.description ||
         !this.gender ||
@@ -241,6 +270,7 @@ export default {
         this.files.length === 0
       ) {
         this.hasError = true;
+        if (!this.category) this.errors.category = "Bir kategori seçin";
         if (!this.brand) this.errors.brand = "Brand alanı boş olamaz!";
         if (!this.description)
           this.errors.desc = "Explanation alanı boş olamaz!";

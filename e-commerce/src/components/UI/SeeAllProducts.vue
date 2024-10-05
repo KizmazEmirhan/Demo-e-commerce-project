@@ -1,15 +1,17 @@
 <template>
-  <div>
-    <p>Mağazanızdaki tüm ürünler</p>
+  <div class="flex flex-wrap justify-center gap-5">
+    <ProductCard :receivedProducts="allProducts"></ProductCard>
   </div>
 </template>
-,
 
 <script>
 import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
-
+import ProductCard from "./ProductCard.vue";
 export default {
+  components: {
+    ProductCard,
+  },
   data() {
     return {
       allProducts: [],
@@ -19,14 +21,15 @@ export default {
     try {
       const querySnapshot = await getDocs(collection(db, "products"));
       querySnapshot.forEach((doc) => {
+        const data = doc.data();
         this.allProducts.push({
-          image: doc._document.data.value.mapValue.fields.images,
-          brand: doc._document.data.value.mapValue.fields.brand.stringValue,
-          color: doc._document.data.value.mapValue.fields.color.stringValue,
-          desc: doc._document.data.value.mapValue.fields.description
-            .stringValue,
-          gender: doc._document.data.value.mapValue.fields.gender.stringValue,
-          price: doc._document.data.value.mapValue.fields.price.integerValue,
+          image: data.images,
+          brand: data.brand,
+          color: data.color,
+          desc: data.description,
+          gender: data.gender,
+          price: data.price,
+          category: data.category,
         });
       });
     } catch (error) {
