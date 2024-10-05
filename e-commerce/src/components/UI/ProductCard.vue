@@ -1,7 +1,7 @@
 <template>
   <div
     id="product-card"
-    class="flex flex-col gap-5 border rounded bg-[#FAFAFA]"
+    class="flex flex-col gap-5 border rounded bg-[#FAFAFA] h-fit"
     v-for="(product, index) in receivedProducts"
     :key="index"
   >
@@ -23,11 +23,6 @@
 
 <script>
 export default {
-  created() {
-    this.receivedProducts.map((product) => {
-      console.log(product.image);
-    });
-  },
   props: ["receivedProducts"],
 };
 </script>

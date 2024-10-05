@@ -135,6 +135,7 @@
                 </option>
                 <option value="Mens Fashion">Erkek Giyim</option>
                 <option value="Womens Fashion">Kadın Giyim</option>
+                <option value="Kids">Çocuk Giyim</option>
               </select>
               <span v-if="hasError && !category" class="text-red-500">{{
                 errors.category
