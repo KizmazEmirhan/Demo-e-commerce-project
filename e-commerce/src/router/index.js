@@ -3,6 +3,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomePage from "@/components/Pages/HomePage.vue";
 import ProductListPage from "../components/Pages/ProductListPage.vue";
 import AdminPage from "@/components/Pages/AdminPage.vue";
+import LoginPage from "@/components/Pages/LoginPage.vue";
+import RegisterPage from "@/components/Pages/RegisterPage.vue";
 
 const routes = [
   { path: "/", name: "Home", component: HomePage, props: true },
@@ -22,6 +24,18 @@ const routes = [
     path: "/user/admin",
     component: AdminPage,
     name: "AdminPage",
+  },
+  {
+    path: "/login",
+    component: LoginPage,
+    name: "LoginPage",
+    meta: { hideNavbarFooter: true },
+  },
+  {
+    path: "/register",
+    component: RegisterPage,
+    name: "RegisterPage",
+    meta: { hideNavbarFooter: true },
   },
 ];
 
