@@ -1,5 +1,5 @@
 <template>
-  <form action="">
+  <form @submit.prevent="loginUser">
     <div class="flex justify-center pt-5">
       <div class="container bg-[#FAFAFA] rounded-lg">
         <div class="flex justify-center gap-5 p-4 flex-col lg:flex-row">
@@ -14,6 +14,8 @@
                 <input
                   type="email"
                   class="border p-2 outline-[#23A6F0] rounded-md"
+                  v-model="email"
+                  required
                   id="email"
                 />
               </div>
@@ -24,6 +26,8 @@
                 <input
                   type="password"
                   class="border p-2 outline-[#23A6F0] rounded-md"
+                  v-model="password"
+                  required
                   id="password"
                 />
               </div>
@@ -50,7 +54,30 @@
 </template>
 
 <script>
+import { auth } from "@/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 export default {
   name: "LoginPage",
+  methods: {
+    async loginUser() {
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          this.email,
+          this.password
+        );
+        console.log("Giriş başarılı", userCredential.user);
+        this.$router.push("/");
+      } catch (e) {
+        console.log(e);
+      }
+    },
+  },
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
 };
 </script>
