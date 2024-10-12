@@ -2,31 +2,34 @@
   <div class="flex justify-center bg-[#FAFAFA]">
     <div
       id="header"
-      class="flex items-center lg:justify-evenly my-4 container justify-between px-2"
+      class="flex items-center lg:justify-evenly my-4 container justify-between lg:flex-row flex-col gap-2"
     >
-      <div id="brand-name" class="font-bold text-xl">
-        <a href="/">Demo Brand</a>
-      </div>
-      <div class="lg:hidden flex">
-        <button @click="openMobileMenu">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="30"
-            height="30"
-            fill="currentColor"
-            class="bi bi-list"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
-            />
-          </svg>
-        </button>
+      <div class="flex justify-between w-full px-2 lg:w-max">
+        <div id="brand-name" class="font-bold text-xl">
+          <a href="/" class="flex whitespace-nowrap">Demo Brand</a>
+        </div>
+        <div id="hamburger-menu" class="lg:hidden flex">
+          <button @click="openMobileMenu">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="currentColor"
+              class="bi bi-list"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+              />
+            </svg>
+          </button>
+        </div>
       </div>
       <div
         id="mobileMenu"
-        class="flex w-0 h-0 z-[999] overflow-x-hidden top-0 left-0 fixed"
+        class="flex bg-[rgba(0,0,0,0.4)] w-full h-full z-[999] overflow-x-hidden top-0 left-0 fixed transition-all duration-300 transform scale-x-0 opacity-0"
+        :class="{ 'scale-x-100 opacity-100': isMobileMenuOpen }"
       >
         <div id="menuWrapper" class="relative flex flex-col bg-[#FAFAFA] p-6">
           <div class="flex justify-between p-2 gap-5">
@@ -128,26 +131,32 @@
           </ul>
         </div>
       </div>
-      <ul id="rooting-buttons" class="lg:flex gap-6 hidden">
-        <li>
-          <button class="text-[#737373] font-bold text-sm">Button</button>
-        </li>
-        <li>
-          <button class="text-[#737373] font-bold text-sm">Button</button>
-        </li>
-        <li>
-          <button class="text-[#737373] font-bold text-sm">Button</button>
-        </li>
-        <li>
-          <button class="text-[#737373] font-bold text-sm">Button</button>
-        </li>
-        <li>
-          <button class="text-[#737373] font-bold text-sm">Button</button>
-        </li>
-      </ul>
-
-      <ul id="registiration-section" class="lg:flex gap-6 items-center hidden">
-        <li>
+      <div id="search" class="flex items-center justify-end w-full px-2">
+        <input
+          type="text"
+          class="relative p-2 rounded-md border w-full outline-[#23a6f0]"
+          placeholder="Aramak istediğiniz ürünü yazınız"
+        />
+        <button class="absolute pr-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="15"
+            height="15"
+            fill="#23A6F0"
+            class="bi bi-search"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
+            />
+          </svg>
+        </button>
+      </div>
+      <ul
+        id="registiration-section"
+        class="lg:flex gap-6 items-center hidden justify-center w-max"
+      >
+        <li class="flex items-center">
           <router-link :to="{ name: 'LoginPage' }">
             <button class="flex gap-3 items-center">
               <svg
@@ -162,11 +171,11 @@
                   d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"
                 />
               </svg>
-              <div class="lg:block text-[#23A6F0] text-sm hidden">Log in</div>
+              <div class="lg:block text-[#23A6F0] text-sm hidden whitespace-nowrap">Log in</div>
             </button>
           </router-link>
         </li>
-        <li>
+        <li class="flex items-center">
           <router-link :to="{ name: 'RegisterPage' }">
             <button class="flex gap-3 items-center">
               <svg
@@ -185,23 +194,7 @@
             </button>
           </router-link>
         </li>
-        <li>
-          <button>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              fill="#23A6F0"
-              class="bi bi-search"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"
-              />
-            </svg>
-          </button>
-        </li>
-        <li>
+        <li class="flex items-center">
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -217,7 +210,7 @@
             </svg>
           </button>
         </li>
-        <li>
+        <li class="flex items-center">
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -259,17 +252,17 @@
 
 <script>
 export default {
+  data() {
+    return {
+      isMobileMenuOpen: false,
+    };
+  },
   methods: {
     openMobileMenu() {
-      const element = document.getElementById("mobileMenu");
-      element.style.width = "100%";
-      element.style.height = "100%";
-      element.style.backgroundColor = "rgba(0,0,0,0.4)";
+      this.isMobileMenuOpen = true;
     },
     closeMobileMenu() {
-      const element = document.getElementById("mobileMenu");
-      element.style.width = "0%";
-      element.style.height = "0%";
+      this.isMobileMenuOpen = false;
     },
   },
 };

@@ -107,6 +107,19 @@
                 />
               </div>
             </div>
+            <div
+              v-if="loginErrorMessage || loginSuccessMessage"
+              :class="{
+                'bg-[#FF9E9E] p-2 rounded-md ': loginErrorMessage,
+                'bg-[#43df5fb9] p-2 rounded-md': loginSuccessMessage,
+              }"
+            >
+              <p class="text-center text-white">
+                {{
+                  loginErrorMessage ? loginErrorMessage : loginSuccessMessage
+                }}
+              </p>
+            </div>
 
             <div id="register-btn" class="">
               <button
@@ -134,7 +147,9 @@
 </template>
 
 <script>
-import { registerUser } from "@/firebase";
+import { auth, db } from "@/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
 export default {
   data() {
     return {
@@ -144,6 +159,8 @@ export default {
       email: null,
       password: null,
       hasError: false,
+      loginErrorMessage: null,
+      loginSuccessMessage: null,
       errors: {
         firstName: null,
         lastName: null,
@@ -184,13 +201,51 @@ export default {
         this.errors.password = "Şifre alanı boş olamaz";
         this.hasError = true;
       }
-      await registerUser(
-        this.firstName,
-        this.lastName,
-        this.phone,
-        this.email,
-        this.password
-      );
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          this.email,
+          this.password
+        );
+        const user = userCredential.user;
+        await setDoc(doc(db, "users", user.uid), {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          phoneNumber: this.phone,
+          email: this.email,
+          password: this.password,
+        });
+        console.log("User created");
+        this.loginSuccessMessage = "Acoount created successfull";
+        setTimeout(() => {
+          this.$router.push("/");
+        }, 2500);
+      } catch (e) {
+        switch (e.code) {
+          case "auth/email-already-in-use":
+            this.loginErrorMessage = "This email is already registered.";
+            break;
+          case "auth/invalid-email":
+            this.loginErrorMessage = "Invalid email format.";
+            break;
+          case "auth/weak-password":
+            this.loginErrorMessage = "Your password is too weak.";
+            break;
+          case "auth/wrong-password":
+            this.loginErrorMessage = "Incorrect password. Please try again.";
+            break;
+          case "auth/user-not-found":
+            this.loginErrorMessage = "No user found with this email.";
+            break;
+          case "auth/too-many-requests":
+            this.loginErrorMessage =
+              "Too many failed login attempts. Please try again later.";
+            break;
+          default:
+            this.loginErrorMessage = "An error occured try again later";
+        }
+        console.log(e);
+      }
     },
   },
 };

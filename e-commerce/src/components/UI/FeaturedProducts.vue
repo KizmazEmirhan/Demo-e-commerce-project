@@ -6,7 +6,7 @@
     <h1 class="text-center pb-5 font-bold text-xl">Featured Products</h1>
     <div
       id="products-container"
-      class="container flex justify-center flex-wrap gap-10"
+      class="container flex justify-center flex-wrap gap-[1.5rem]"
     >
       <div
         id="product"

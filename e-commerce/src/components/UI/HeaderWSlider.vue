@@ -2,24 +2,19 @@
   <div id="header-section">
     <div id="slider">
       <Swiper
-        :autoplay="{
-          delay: 2500,
-          disableOnInteraction: false,
-        }"
         :slidesPerView="1"
         :spaceBetween="30"
         :loop="true"
         :pagination="{
           clickable: true,
         }"
-        :navigation="true"
         :modules="modules"
       >
         <SwiperSlide v-for="image in sliderImages" :key="image">
           <img
             :src="image.image"
             alt="slider image"
-            class="w-full"
+            class="w-full object-cover"
             loading="lazy"
           />
         </SwiperSlide>

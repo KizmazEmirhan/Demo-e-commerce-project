@@ -1,10 +1,12 @@
 <template>
   <div id="explore-categories" class="p-4">
-    <Swiper :slides-per-view="4" :lazy="true">
+    <div class="text-lg font-bold pb-4">Kategorileri keşfet</div>
+
+    <Swiper :slides-per-view="slidesPerView" :lazy="true" :space-between="50">
       <SwiperSlide v-for="category in categories" :key="category.id">
         <div class="flex items-center flex-col gap-3">
           <img :src="category.image" alt="category-image" loading="lazy" />
-          <p class="font-bold">{{ category.name }}</p>
+
           <router-link
             :to="{
               name: 'Category',
@@ -13,11 +15,11 @@
               },
             }"
           >
-            <button
-              class="rounded border-solid border-[#cecece] border-[1px] hover:text-[#23A6F0] text-[#6f6c6c] p-2"
+            <p
+              class="font-bold hover:text-[#23a6f0] transition-all text-center"
             >
-              Go to {{ category.name }} page
-            </button>
+              {{ category.name }}
+            </p>
           </router-link>
         </div>
       </SwiperSlide>
@@ -47,6 +49,11 @@ export default {
     } catch (error) {
       console.log(error);
     }
+    window.addEventListener("resize", this.updateSlidesPerView);
+    this.updateSlidesPerView();
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.updateSlidesPerView);
   },
   components: {
     Swiper,
@@ -55,7 +62,13 @@ export default {
   data() {
     return {
       categories: [],
+      slidesPerView: 4,
     };
+  },
+  methods: {
+    updateSlidesPerView() {
+      this.slidesPerView = window.innerWidth <= 450 ? 2 : 4;
+    },
   },
 };
 </script>

@@ -7,16 +7,21 @@
         :key="index"
         :id="index"
       >
-        <router-link v-if="breadcrumb.link" :to="breadcrumb.link">{{
+        <router-link
+          v-if="breadcrumb.link"
+          :to="breadcrumb.link"
+          class="text-xs font-bold text-[#a3a3a3]"
+          >{{ breadcrumb.text }}</router-link
+        >
+        <span v-else class="text-xs font-bold text-[#a3a3a3]">{{
           breadcrumb.text
-        }}</router-link>
-        <span v-else>{{ breadcrumb.text }}</span>
+        }}</span>
         <span v-if="index < breadcrumbs.length - 1"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
+            width="12"
+            height="12"
+            fill="#a3a3a3"
             class="bi bi-chevron-right"
             viewBox="0 0 16 16"
           >
@@ -32,7 +37,6 @@
 </template>
 
 <script>
-//aktif olan sayfanın linki aktif değil
 export default {
   computed: {
     breadcrumbs() {
