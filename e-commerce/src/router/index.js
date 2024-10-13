@@ -5,21 +5,10 @@ import ProductListPage from "../components/Pages/ProductListPage.vue";
 import AdminPage from "@/components/Pages/AdminPage.vue";
 import LoginPage from "@/components/Pages/LoginPage.vue";
 import RegisterPage from "@/components/Pages/RegisterPage.vue";
-
+import ProductDetailsPage from "@/components/Pages/ProductDetailsPage.vue";
 const routes = [
   { path: "/", name: "Home", component: HomePage, props: true },
-  {
-    path: "/category/:categoryName",
-    name: "Category",
-    component: ProductListPage,
-    props: true,
-    meta: {
-      breadcrumb: (route) => [
-        { text: "Home", link: "/" },
-        { text: route.params.categoryName, link: route.path },
-      ],
-    },
-  },
+
   {
     path: "/user/admin",
     component: AdminPage,
@@ -36,6 +25,34 @@ const routes = [
     component: RegisterPage,
     name: "RegisterPage",
     meta: { hideNavbarFooter: true },
+  },
+  {
+    path: "/:categoryName/:id",
+    component: ProductDetailsPage,
+    name: "ProductDetailsPage",
+    props: true,
+    meta: {
+      breadcrumb: (route) => [
+        { text: "Home", link: "/" },
+        {
+          text: route.params.categoryName,
+          link: `/category/${route.params.categoryName}`,
+        },
+        { text: route.params.id, link: null },
+      ],
+    },
+  },
+  {
+    path: "/category/:categoryName",
+    name: "Category",
+    component: ProductListPage,
+    props: true,
+    meta: {
+      breadcrumb: (route) => [
+        { text: "Home", link: "/" },
+        { text: route.params.categoryName, link: route.path },
+      ],
+    },
   },
 ];
 

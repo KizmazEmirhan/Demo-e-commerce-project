@@ -5,7 +5,7 @@
     <div class="flex justify-center p-5">
       <div class="flex gap-5 container justify-between">
         <FilterComponent :receivedDatas="categoryProducts"></FilterComponent>
-        <div class="flex flex-wrap justify-between gap-5 container">
+        <div class="flex flex-wrap justify-start gap-5 container">
           <ProductCard :receivedProducts="categoryProducts"></ProductCard>
         </div>
       </div>
@@ -29,6 +29,7 @@ export default {
         const data = doc.data();
         if (data.gender == this.gender) {
           this.categoryProducts.push({
+            id:data.id,
             image: data.images,
             brand: data.brand,
             color: data.color,

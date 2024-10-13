@@ -4,8 +4,13 @@
 
     <Swiper :slides-per-view="slidesPerView" :lazy="true" :space-between="50">
       <SwiperSlide v-for="category in categories" :key="category.id">
-        <div class="flex items-center flex-col gap-3">
-          <img :src="category.image" alt="category-image" loading="lazy" />
+        <div class="flex items-center justify-center group">
+          <img
+            :src="category.image"
+            alt="category-image"
+            loading="lazy"
+            class="h-64 w-full object-cover relative group-hover:blur-sm transition-all group-hover:scale-95"
+          />
 
           <router-link
             :to="{
@@ -14,9 +19,10 @@
                 categoryName: category.name,
               },
             }"
+            class="absolute"
           >
             <p
-              class="font-bold hover:text-[#23a6f0] transition-all text-center"
+              class="font-bold group-hover:text-white transition-all text-center text-transparent text-2xl"
             >
               {{ category.name }}
             </p>

@@ -1,8 +1,12 @@
 <template>
   <div class="flex justify-center p-4">
-    <div class="container flex flex-wrap gap-5 justify-center sm:justify-normal">
+    <div
+      v-if="allProducts.length != 0"
+      class="container flex flex-wrap gap-5 justify-center sm:justify-normal"
+    >
       <ProductCard :receivedProducts="allProducts"></ProductCard>
     </div>
+    <div v-if="errorMessage" class="text-2xl font-bold">{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -17,9 +21,11 @@ export default {
   data() {
     return {
       allProducts: [],
+      errorMessage: null,
     };
   },
   async created() {
+    this.errorMessage = null;
     try {
       const querySnapshot = await getDocs(collection(db, "products"));
       querySnapshot.forEach((doc) => {
@@ -34,6 +40,10 @@ export default {
           category: data.category,
         });
       });
+
+      if (this.allProducts.length === 0) {
+        this.errorMessage = "Herhangibir ürününüz yoktur.";
+      }
     } catch (error) {
       console.log(error);
     }

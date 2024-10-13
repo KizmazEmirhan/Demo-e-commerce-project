@@ -197,6 +197,7 @@
 import { db, storage } from "@/firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { v4 as uuidV4 } from "uuid";
 export default {
   data() {
     return {
@@ -292,11 +293,13 @@ export default {
         const imageUrls = await Promise.all(uploadPromises);
 
         await addDoc(collection(db, "products"), {
+          id: uuidV4(),
           brand: this.brand,
           description: this.description,
           gender: this.gender,
           color: this.color,
           price: this.price,
+          category: this.category,
           images: imageUrls,
         });
 
