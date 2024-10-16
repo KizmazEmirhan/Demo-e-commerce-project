@@ -14,11 +14,10 @@
         v-for="product in featured_products"
         :key="product.id"
       >
-        <img
-          :src="product.image"
-          alt="product-image"
+        <LoaderComponent
+          :imageSrc="product.image"
           class="group-hover:opacity-45 transition-opacity"
-        />
+        ></LoaderComponent>
         <div class="hidden group-hover:block absolute">
           <div class="flex flex-col items-center gap-4">
             <h3 class="font-bold text-lg">{{ product.title }}</h3>
@@ -69,11 +68,15 @@
 <script>
 import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import LoaderComponent from "./LoaderComponent.vue";
 export default {
   data() {
     return {
       featured_products: [],
     };
+  },
+  components: {
+    LoaderComponent,
   },
   async created() {
     try {

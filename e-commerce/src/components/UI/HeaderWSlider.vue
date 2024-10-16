@@ -1,24 +1,21 @@
 <template>
-  <div id="header-section">
-    <div id="slider">
-      <Swiper
-        :slidesPerView="1"
-        :spaceBetween="30"
-        :loop="true"
-        :pagination="{
-          clickable: true,
-        }"
-        :modules="modules"
-      >
-        <SwiperSlide v-for="image in sliderImages" :key="image">
-          <img
-            :src="image.image"
-            alt="slider image"
-            class="w-full object-cover"
-            loading="lazy"
-          />
-        </SwiperSlide>
-      </Swiper>
+  <div>
+    <div id="header-section">
+      <div id="slider">
+        <Swiper
+          :slidesPerView="1"
+          :spaceBetween="30"
+          :loop="true"
+          :pagination="{
+            clickable: true,
+          }"
+          :modules="modules"
+        >
+          <SwiperSlide v-for="imageSrc in sliderImages" :key="imageSrc">
+            <LoaderComponent :imageSrc="imageSrc"></LoaderComponent>
+          </SwiperSlide>
+        </Swiper>
+      </div>
     </div>
   </div>
 </template>
@@ -32,6 +29,7 @@ import { collection, getDocs } from "firebase/firestore";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import LoaderComponent from "./LoaderComponent.vue";
 export default {
   data() {
     return { sliderImages: [] };
@@ -52,6 +50,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
+    LoaderComponent,
   },
   setup() {
     return {

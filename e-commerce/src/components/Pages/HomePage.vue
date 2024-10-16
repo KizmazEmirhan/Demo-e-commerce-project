@@ -1,6 +1,5 @@
 <template>
   <HeaderWSlider></HeaderWSlider>
-
   <ExploreItems></ExploreItems>
   <FeaturedProducts></FeaturedProducts>
 </template>

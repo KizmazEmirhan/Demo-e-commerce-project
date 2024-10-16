@@ -5,12 +5,7 @@
     <Swiper :slides-per-view="slidesPerView" :lazy="true" :space-between="50">
       <SwiperSlide v-for="category in categories" :key="category.id">
         <div class="flex items-center justify-center group">
-          <img
-            :src="category.image"
-            alt="category-image"
-            loading="lazy"
-            class="h-64 w-full object-cover relative group-hover:blur-sm transition-all group-hover:scale-95"
-          />
+          <LoaderComponent :imageSrc="category.image" class="group-hover:blur-sm transition-all w-full h-64"></LoaderComponent>
 
           <router-link
             :to="{
@@ -38,6 +33,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import "swiper/css";
+import LoaderComponent from "./LoaderComponent.vue";
 export default {
   async created() {
     try {
@@ -64,6 +60,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
+    LoaderComponent,
   },
   data() {
     return {

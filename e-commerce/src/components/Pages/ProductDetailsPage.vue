@@ -1,5 +1,5 @@
 <template>
-  Merhaba
+
   <BreadCrumb></BreadCrumb>
   <div></div>
 </template>
@@ -40,6 +40,6 @@ export default {
     } catch (error) {
       console.error("Error fetching product:", error); // Hata logla
     }
-  },
+  },   
 };
 </script>
