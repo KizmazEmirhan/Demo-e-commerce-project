@@ -10,10 +10,10 @@
         <router-link
           v-if="breadcrumb.link"
           :to="breadcrumb.link"
-          class="text-xs font-bold text-[#a3a3a3]"
+          class="md:text-xs font-bold text-[#a3a3a3] text-[10px] whitespace-nowrap"
           >{{ breadcrumb.text }}</router-link
         >
-        <span v-else class="text-xs font-bold text-[#a3a3a3]">{{
+        <span v-else class="md:text-xs text-[10px] font-bold text-[#a3a3a3]">{{
           breadcrumb.text
         }}</span>
         <span v-if="index < breadcrumbs.length - 1"
