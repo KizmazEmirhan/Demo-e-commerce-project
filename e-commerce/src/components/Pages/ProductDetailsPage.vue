@@ -2,7 +2,7 @@
   <div class="flex justify-center pt-2">
     <div class="container">
       <div class="flex justify-end p-2">
-        <BreadCrumb></BreadCrumb>
+        <BreadCrumb />
       </div>
       <div
         v-for="productCard in product"
@@ -54,12 +54,13 @@ export default {
       product: [],
     };
   },
-  props: ["id"],
+  props: ["id", "fromAdmin"],
 
   async created() {
+    console.log(this.fromAdmin);
     try {
       const productId = this.id || this.$route.params.id;
-      console.log("Product ID:", productId); // ID'yi logla
+      console.log("Product ID:", productId);
 
       if (productId) {
         const q = query(
@@ -71,6 +72,7 @@ export default {
           const docSnap = querySnapshot.docs[0];
           const data = docSnap.data();
           this.product.push({
+            id: data.id,
             brand: data.brand,
             color: data.color,
             desc: data.description,
@@ -78,16 +80,13 @@ export default {
             images: [data.images],
             price: data.price,
           });
-          console.log("Document data=", data);
-          console.log("product array=", this.product);
           return data;
         } else {
-          console.log("no such document");
-          return null;
+          console.log("No such document");
         }
       }
     } catch (error) {
-      console.error("Error fetching product:", error); // Hata logla
+      console.error("Error fetching product:", error);
     }
   },
 };

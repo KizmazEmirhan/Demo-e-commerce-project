@@ -4,7 +4,10 @@
       v-if="allProducts.length != 0"
       class="container flex flex-wrap gap-5 justify-center sm:justify-normal"
     >
-      <ProductCard :receivedProducts="allProducts"></ProductCard>
+      <ProductCard
+        :receivedProducts="allProducts"
+        :fromAdmin="true"
+      ></ProductCard>
     </div>
     <div v-if="errorMessage" class="text-2xl font-bold">{{ errorMessage }}</div>
   </div>
@@ -38,11 +41,12 @@ export default {
           gender: data.gender,
           price: data.price,
           category: data.category,
+          id: data.id,
         });
       });
 
       if (this.allProducts.length === 0) {
-        this.errorMessage = "Herhangibir ürününüz yoktur.";
+        this.errorMessage = "Herhangi bir ürününüz yok.";
       }
     } catch (error) {
       console.log(error);

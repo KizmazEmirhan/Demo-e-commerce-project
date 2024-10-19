@@ -41,7 +41,6 @@ export default {
   computed: {
     breadcrumbs() {
       const matched = this.$route.matched;
-
       const breadcrumbs = matched.reduce((acc, route) => {
         const breadcrumb =
           typeof route.meta.breadcrumb === "function"

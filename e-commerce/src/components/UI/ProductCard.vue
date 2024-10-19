@@ -2,7 +2,13 @@
   <router-link
     v-for="(product, index) in receivedProducts"
     :key="index"
-    :to="{ name: 'ProductDetailsPage', params: { id: product.id } }"
+    :to="{
+      name: 'ProductDetailsPage',
+      params: { id: product.id },
+      query: {
+        fromAdmin: fromAdmin ? 'true' : 'false',
+      },
+    }"
   >
     <div
       id="product-card"
@@ -27,7 +33,9 @@
 
 <script>
 export default {
-  props: ["receivedProducts"],
+  props: ["receivedProducts", "fromAdmin"],
+  created() {
+    console.log(this.fromAdmin);
+  },
 };
 </script>
-<!-- image,brand,color,desc,gender,price -->

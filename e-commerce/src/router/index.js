@@ -6,6 +6,7 @@ import AdminPage from "@/components/Pages/AdminPage.vue";
 import LoginPage from "@/components/Pages/LoginPage.vue";
 import RegisterPage from "@/components/Pages/RegisterPage.vue";
 import ProductDetailsPage from "@/components/Pages/ProductDetailsPage.vue";
+
 const routes = [
   { path: "/", name: "Home", component: HomePage, props: true },
 
@@ -27,19 +28,37 @@ const routes = [
     meta: { hideNavbarFooter: true },
   },
   {
-    path: "/:categoryName/:id",
+    path: "/:categoryName?/products/:id",
     component: ProductDetailsPage,
     name: "ProductDetailsPage",
-    props: true,
+    props: (route) => ({
+      id: route.params.id,
+      fromAdmin: route.query.fromAdmin === "true",
+    }),
     meta: {
-      breadcrumb: (route) => [
-        { text: "Home", link: "/" },
-        {
-          text: route.params.categoryName,
-          link: `/category/${route.params.categoryName}`,
-        },
-        { text: route.params.id, link: null },
-      ],
+      breadcrumb(route) {
+        //console.log(route.meta.fromAdmin);
+        if (route.query.fromAdmin === "true") {
+          return [
+            { text: "Home", link: "/" },
+            {
+              text: "All products",
+              link: "/user/admin",
+            },
+            { text: route.params.id, link: "" },
+          ];
+        } else {
+          return [
+            { text: "Home", link: "/" },
+            {
+              text: route.params.categoryName || "Product Details",
+              link: route.path,
+            },
+            { text: route.params.id, link: "" },
+          ];
+        }
+      },
+      fromAdmin: false,
     },
   },
   {
