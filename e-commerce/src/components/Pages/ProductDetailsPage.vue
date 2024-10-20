@@ -34,7 +34,7 @@
               <SwiperSlide
                 v-for="image in productCard.images"
                 :key="image"
-                class="bg-[#FAFAFA]"
+                class="bg-[#FAFAFA] flex justify-center"
                 ><img
                   :src="image"
                   alt="product-image"
