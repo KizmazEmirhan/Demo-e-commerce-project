@@ -34,8 +34,5 @@
 <script>
 export default {
   props: ["receivedProducts", "fromAdmin"],
-  created() {
-    console.log(this.fromAdmin);
-  },
 };
 </script>
