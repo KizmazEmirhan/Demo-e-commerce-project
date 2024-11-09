@@ -60,7 +60,7 @@
         </div>
       </div>
       <div id="made by who section" class="flex justify-center items-end p-12 bg-[#FAFAFA]">
-        <p>Made with love by Emirhan KIZMAZ</p>
+        <p>Made with ❤️ by Emirhan KIZMAZ</p>
       </div>
     </div>
   </div>

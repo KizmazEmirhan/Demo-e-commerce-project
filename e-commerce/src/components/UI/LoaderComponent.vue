@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     processImageSource(src) {
-      console.log("Received image source:", src);
       let url;
       if (typeof src === "object" && src.image) {
         url = src.image;
@@ -76,9 +75,7 @@ export default {
       img.onerror = this.onError;
       img.src = url;
     },
-    onLoad(event) {
-      console.log("Image loaded successfully", event);
-    },
+
     onError(event) {
       console.error("Error loading image", event);
       this.isLoading = false;

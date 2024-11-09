@@ -80,8 +80,9 @@
 
 <script>
 import { auth } from "@/firebase";
-
+import { mapActions } from "vuex";
 import { signInWithEmailAndPassword } from "firebase/auth";
+
 export default {
   name: "LoginPage",
   data() {
@@ -93,9 +94,12 @@ export default {
       email: null,
       password: null,
       hasError: false,
+
+      currentUser: null,
     };
   },
   methods: {
+    ...mapActions(["loginUser"]),
     async loginUser() {
       this.hasError = false;
       this.errors = {
@@ -116,9 +120,14 @@ export default {
           this.email,
           this.password
         );
+        const user = userCredential.user;
+        console.log(userCredential);
+        this.$store.dispatch("loginUser", {
+          email: user.email,
+          isAdmin: user.email === "realadmin.e_commerce@admin.com",
+        });
 
-        console.log("Giriş başarılı", userCredential.user);
-        this.$router.push("/");
+        this.$router.push(this.isAdmin ? "/user/admin" : "/");
       } catch (e) {
         console.log(e);
       }

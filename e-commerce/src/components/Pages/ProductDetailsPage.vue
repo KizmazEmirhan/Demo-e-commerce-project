@@ -65,10 +65,9 @@
 
           <div
             id="answer"
-            v-show="isAnswered"
             :class="{
-              'border overflow-hidden transition-all ease-in-out duration-500': true,
-              'p-4': isAnswered,
+              'overflow-hidden transition-all ease-linear duration-250 px-4': true,
+              'border py-4': isAnswered,
             }"
             :style="{
               maxHeight: isAnswered ? accordionMaxHeight + 'px' : '0px',
@@ -157,7 +156,8 @@ export default {
           const accordionContent = document.getElementById("answer");
 
           if (accordionContent) {
-            this.accordionMaxHeight = accordionContent.scrollHeight;
+            console.log(accordionContent.scrollHeight);
+            this.accordionMaxHeight = accordionContent.scrollHeight * 10;
           }
         });
       }

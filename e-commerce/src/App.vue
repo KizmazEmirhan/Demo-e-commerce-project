@@ -13,6 +13,9 @@ export default {
     MainHeader,
     FooterComponent,
   },
+  created() {
+    this.$store.dispatch("initializeStore");
+  },
 };
 </script>
 
