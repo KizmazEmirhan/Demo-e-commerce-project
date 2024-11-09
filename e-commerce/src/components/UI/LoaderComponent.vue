@@ -2,7 +2,7 @@
   <div class="flex justify-center">
     <div
       v-if="isLoading"
-      class="flex animate-pulse bg-gray-300 justify-center items-center w-full h-64 after:content-['Yükleniyor']"
+      class="flex animate-pulse bg-gray-300 justify-center items-center w-full h-64 after:content-['Yükleniyor...']"
     ></div>
     <img
       v-show="!isLoading && imageUrl"
@@ -10,7 +10,7 @@
       @load="onLoad"
       @error="onError"
       ref="image"
-      class="object-cover w-full h-auto"
+      :class="imageClasses"
     />
   </div>
 </template>
@@ -21,6 +21,10 @@ export default {
     imageSrc: {
       type: [Object, String],
       required: true,
+    },
+    imageClasses: {
+      type: String,
+      default: "object-cover w-full h-auto",
     },
   },
   data() {

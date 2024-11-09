@@ -1,22 +1,22 @@
 <template>
   <div
     id="featured products"
-    class="flex flex-col justify-center p-5 items-center bg-[#FAFAFA]"
+    class="flex flex-col justify-center p-3 items-center bg-[#FAFAFA]"
   >
     <h1 class="text-center pb-5 font-bold text-xl">Featured Products</h1>
     <div
       id="products-container"
-      class="container flex justify-center flex-wrap gap-[1.5rem]"
+      class="w-full container flex justify-start  flex-wrap gap-3 lg:gap-[1.5rem] lg:justify-center"
     >
       <div
         id="product"
-        class="w-fit flex items-center flex-col gap-3 group relative justify-center"
+        class="w-fit flex items-center flex-col  gap-3 group relative justify-center"
         v-for="product in featured_products"
         :key="product.id"
       >
         <LoaderComponent
           :imageSrc="product.image"
-          class="group-hover:opacity-45 transition-opacity"
+          :imageClasses="'object-cover h-64 w-40 lg:h-auto lg:w-full group-hover:opacity-45 transition-opacity'"
         ></LoaderComponent>
         <div class="hidden group-hover:block absolute">
           <div class="flex flex-col items-center gap-4">
@@ -62,6 +62,8 @@
           </div>
         </div>
       </div>
+
+
     </div>
   </div>
 </template>

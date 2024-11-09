@@ -125,10 +125,30 @@
               <button
                 type="submit"
                 :class="{
-                  'p-2 w-full bg-[#23A6F0] text-white rounded-md hover:bg-[#3d96cd]': true,
+                  'p-2 w-full bg-[#23A6F0] text-white rounded-md hover:bg-[#3d96cd] flex justify-center': true,
                   'bg-red-500': hasError,
                 }"
               >
+                <svg
+                  class="animate-spin h-5 w-5 mr-3"
+                  viewBox="0 0 24 24"
+                  v-if="stillCreating"
+                >
+                  <circle
+                    class="opacity-0"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="none"
+                    stroke-width="0"
+                  ></circle>
+                  <path
+                    class="opacity-75"
+                    fill="white"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+
                 Register
               </button>
             </div>
@@ -161,6 +181,7 @@ export default {
       hasError: false,
       loginErrorMessage: null,
       loginSuccessMessage: null,
+      stillCreating: false,
       errors: {
         firstName: null,
         lastName: null,
@@ -201,7 +222,9 @@ export default {
         this.errors.password = "Şifre alanı boş olamaz";
         this.hasError = true;
       }
+
       try {
+        this.stillCreating = true;
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           this.email,
@@ -216,11 +239,13 @@ export default {
           password: this.password,
         });
         console.log("User created");
+
         this.loginSuccessMessage = "Acoount created successfull";
         setTimeout(() => {
           this.$router.push("/");
         }, 2500);
       } catch (e) {
+        this.stillCreating = false;
         switch (e.code) {
           case "auth/email-already-in-use":
             this.loginErrorMessage = "This email is already registered.";
