@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "dev": "vue-cli-service serve",
+    "postinstall": "npm install vuex",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -13,8 +15,10 @@
     "firebase": "^10.13.2",
     "swiper": "^11.1.14",
     "tailwindcss-animate": "^1.0.7",
+    "uuid": "^10.0.0",
     "vue": "^3.2.13",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.4.5",
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
