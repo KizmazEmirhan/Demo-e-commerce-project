@@ -27,9 +27,9 @@ export default {
       const querySnapshot = await getDocs(collection(db, "products"));
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        if (data.gender == this.gender) {
+        if (data.gender == this.gender || data.category == "Accessory") {
           this.categoryProducts.push({
-            id:data.id,
+            id: data.id,
             image: data.images,
             brand: data.brand,
             color: data.color,

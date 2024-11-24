@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center bg-[#FAFAFA]">
+  <div class="flex items-center bg-[#FAFAFA] flex-col">
     <div
       id="header"
       class="flex items-center lg:justify-evenly my-4 container justify-between lg:flex-row flex-col gap-2"
@@ -252,13 +252,21 @@
         </li>
       </ul>
     </div>
+    <div
+      id="colorful-bar"
+      class="bg-gradient-to-r from-[#ff0000] via-[#2397b5] to-[#3700ff] h-2 w-full"
+    ></div>
   </div>
+  <HeaderCategories></HeaderCategories>
 </template>
 
 <script>
 import { mapState } from "vuex";
-
+import HeaderCategories from "./HeaderCategories.vue";
 export default {
+  components: {
+    HeaderCategories,
+  },
   data() {
     return {
       isMobileMenuOpen: false,
