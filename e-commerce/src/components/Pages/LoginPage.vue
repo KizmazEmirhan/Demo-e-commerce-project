@@ -57,12 +57,43 @@
               </div>
             </div>
 
-            <div id="login-btn" class="">
+            <div id="login-btn" class="flex items-center justify-start">
+              <div class="absolute" v-if="isLogged">
+                <svg
+                  class="ml-3 size-5 animate-spin text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    class="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    stroke-width="4"
+                  ></circle>
+                  <path
+                    class="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              </div>
               <button
                 class="p-2 w-full bg-[#23A6F0] text-white rounded-md hover:bg-[#3d96cd]"
               >
                 Login
               </button>
+            </div>
+            <div
+              v-if="generalErrorOccurred"
+              id="general_error_section"
+              class="bg-[rgba(255,0,0,0.15)] p-2"
+            >
+              <div for="general_error" class="text-sm text-red-500 pt-1">
+                {{ generalError }}
+              </div>
             </div>
           </div>
           <div class="flex justify-center">
@@ -81,6 +112,7 @@
 <script>
 import { auth } from "@/firebase";
 import { mapActions } from "vuex";
+import { ref } from "vue";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default {
@@ -91,20 +123,26 @@ export default {
         emailError: null,
         passwordError: null,
       },
+      isLogged: false,
       email: null,
       password: null,
       hasError: false,
-
+      generalError: ref(""),
       currentUser: null,
+      generalErrorOccurred: false,
     };
   },
+
   methods: {
     ...mapActions(["loginUser"]),
     async loginUser() {
+      //add logging in message to the page and add spin animation to the button
+      this.isLogged = true;
       this.hasError = false;
       this.errors = {
         emailError: null,
         passwordError: null,
+        generalError: null,
       };
       if (!this.email) {
         this.hasError = true;
@@ -121,7 +159,7 @@ export default {
           this.password
         );
         const user = userCredential.user;
-        console.log(userCredential);
+        console.log("user credential", userCredential);
         this.$store.dispatch("loginUser", {
           email: user.email,
           isAdmin: user.email === "realadmin.e_commerce@admin.com",
@@ -129,7 +167,30 @@ export default {
 
         this.$router.push(this.isAdmin ? "/user/admin" : "/");
       } catch (e) {
-        console.log(e);
+        console.log("error", e); //    auth/invalid-credential
+        switch (e.code) {
+          case "auth/user-not-found":
+            this.errors.emailError =
+              "Bu e-posta ile kayıtlı bir kullanıcı bulunamadı.";
+            break;
+          case "auth/wrong-password":
+            this.errors.passwordError = "Şifre hatalı. Lütfen tekrar deneyin.";
+            break;
+          case "auth/invalid-email":
+            this.errors.emailError = "Geçersiz e-posta formatı.";
+            break;
+          case "auth/too-many-requests":
+            this.errors.passwordError =
+              "Çok fazla başarısız giriş denemesi. Lütfen daha sonra tekrar deneyin.";
+            break;
+          default:
+            this.generalErrorOccurred = true;
+            this.generalError = "Bir hata oluştu lütfen tekrar deneyin.";
+
+            break;
+        }
+      } finally {
+        this.isLogged = false;
       }
     },
     showPassword() {
