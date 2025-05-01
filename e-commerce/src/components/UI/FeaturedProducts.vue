@@ -6,11 +6,11 @@
     <h1 class="text-center pb-5 font-bold text-xl">Featured Products</h1>
     <div
       id="products-container"
-      class="w-full container flex justify-start  flex-wrap gap-3 lg:gap-[1.5rem] lg:justify-center"
+      class="w-full container sm:flex items-center justify-center flex-wrap gap-3 lg:gap-[1.5rem] lg:justify-center grid grid-cols-2"
     >
       <div
         id="product"
-        class="w-fit flex items-center flex-col  gap-3 group relative justify-center"
+        class="w-fit flex items-center flex-col gap-3 group relative justify-center p-2"
         v-for="product in featured_products"
         :key="product.id"
       >
@@ -62,8 +62,6 @@
           </div>
         </div>
       </div>
-
-
     </div>
   </div>
 </template>

@@ -1,9 +1,9 @@
 <template>
   <div class="flex justify-center bg-[#FAFAFA]">
-    <div class="flex container">
+    <div id="header_categories" class="flex container overflow-x-auto">
       <ul class="flex gap-5 w-full justify-between">
         <li
-          class="font-bold px-4 w-full text-center hover:text-[#23A6F0] hover:bg-white cursor-pointer py-4"
+          class="flex items-center justify-center first-of-type:justify-start last-of-type:justify-end font-bold px-4 w-full text-center hover:text-[#23A6F0] hover:bg-white cursor-pointer py-4"
           v-for="(category_name, index) in receivedCategories.category_name"
           :key="index"
         >
@@ -36,3 +36,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#header_categories {
+  --webkit-scrollbar: none;
+}
+</style>
