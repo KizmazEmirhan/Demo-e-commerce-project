@@ -4,17 +4,17 @@
     v-if="!selectedComponent"
     class="flex justify-center pt-4 p-2"
   >
-    <div class="container flex justify-between">
+    <div class="container flex justify-between flex-col lg:flex-row gap-4">
       <div
         v-for="thing in imagesAndTitles"
         :key="thing.id"
         id="product-add-or-show"
-        class="flex justify-center items-center"
+        class="flex justify-center items-center transition-all duration-300 hover:shadow-blue-300/50 hover:shadow-lg"
       >
         <img
           :src="thing.image"
           alt="image"
-          class="brightness-75 relative h-full"
+          class="brightness-75 relative h-full max-w-[300px] object-cover"
         />
         <div class="absolute flex flex-col items-center justify-center">
           <button
@@ -54,8 +54,9 @@ import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import SeeAllProducts from "../UI/SeeAllProducts.vue";
 import AddNewProduct from "../UI/AddNewProduct.vue";
+import AddCategory from "../UI/AddCategory.vue";
 export default {
-  components: { SeeAllProducts, AddNewProduct },
+  components: { SeeAllProducts, AddNewProduct, AddCategory },
   name: "AdminPage",
   data() {
     return {
@@ -84,6 +85,22 @@ export default {
                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C 4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
                 <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
                 </svg>`,
+        },
+        {
+          text: "Add a new category",
+          icon: `      <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="white"
+            class="bi bi-plus-lg"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"
+            />
+          </svg>`,
         },
       ],
       selectedIcon: ``,
@@ -114,6 +131,8 @@ export default {
         this.selectedComponent = "AddNewProduct";
       } else if (componentName === "See all of your products") {
         this.selectedComponent = "SeeAllProducts";
+      } else if (componentName === "Add a new category") {
+        this.selectedComponent = "AddCategory";
       } else {
         console.log("Bir hata oluştu");
       }
